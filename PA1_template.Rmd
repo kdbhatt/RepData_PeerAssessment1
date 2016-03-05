@@ -11,13 +11,13 @@ setwd("C:/Krishna/MyProject/DataScience/5_Reproducible_Research")
 
 ## Loading and preprocessing the data
 
-###1. Load the data (i.e. read.csv())
+#####1. Load the data (i.e. read.csv())
 
 ```{r}
 activity <- read.csv("activity.csv", stringsAsFactors=FALSE)
 ```
 
-###2.Process/transform the data (if necessary) into a format suitable for your analysis
+#####2.Process/transform the data (if necessary) into a format suitable for your analysis
 
 
 ```{r}
@@ -25,6 +25,28 @@ activity$date <- as.POSIXct(activity$date, format="%Y-%m-%d")
 ```
 
 ## What is mean total number of steps taken per day?
+
+#####1. Calculate the total number of steps taken per day
+
+```{r}
+total_activity <- aggregate(activity$steps, by=list(activity$date), FUN=sum, na.rm=TRUE)
+names(total_activity) <- c("date", "total")
+head(total_activity,10)
+```
+
+#####2 Make a histogram of the total number of steps taken each day
+```{r}
+hist(total_activity$total, 
+     col="blue", 
+     xlab="Total number of steps", 
+     main="Histogram of the total number of steps taken each day")
+```
+
+#####3. Calculate and report the mean and median of the total number of steps taken per day
+```{r}
+mean(total_activity$total)
+median(total_activity$total)
+```
 
 
 
