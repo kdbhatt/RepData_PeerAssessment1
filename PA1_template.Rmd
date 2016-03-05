@@ -1,8 +1,7 @@
-echo = TRUE
 ---
-title: "Reproducible Research: Peer Assessment 1"
+Title: "Reproducible Research: Peer Assessment 1"
 output: 
-  html_document:
+  html_document: 
     keep_md: true
 ---
 
@@ -15,14 +14,14 @@ setwd("C:/Krishna/MyProject/DataScience/5_Reproducible_Research/RepData_PeerAsse
 
 #####1. Load the data (i.e. read.csv())
 
-```{r}
+```{r load,echo=TRUE}
 activity <- read.csv("activity.csv", stringsAsFactors=FALSE)
 ```
 
 #####2.Process/transform the data (if necessary) into a format suitable for your analysis
 
 
-```{r}
+```{r convert, echo=TRUE}
 #Convert string to date 
 activity$date <- as.POSIXct(activity$date, format="%Y-%m-%d")
 ```
@@ -31,14 +30,14 @@ activity$date <- as.POSIXct(activity$date, format="%Y-%m-%d")
 
 #####1. Calculate the total number of steps taken per day
 
-```{r}
+```{r total, echo=TRUE}
 total_activity <- aggregate(activity$steps, by=list(activity$date), FUN=sum, na.rm=TRUE)
 names(total_activity) <- c("date", "total")
 head(total_activity,10)
 ```
 
 #####2. Make a histogram of the total number of steps taken each day
-```{r}
+```{r hist1, echo=TRUE}
 hist(total_activity$total, 
      col="blue", 
      xlab="Total number of steps", 
@@ -46,7 +45,7 @@ hist(total_activity$total,
 ```
 
 #####3. Calculate and report the mean and median of the total number of steps taken per day
-```{r}
+```{r calc, echo=TRUE}
 mean(total_activity$total)
 median(total_activity$total)
 ```
@@ -56,7 +55,7 @@ median(total_activity$total)
 
 #####1. Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 
-```{r}
+```{r mean1, echo=TRUE}
 mean_activity <- aggregate(activity$steps, 
                        by=list(activity$interval), 
                        FUN=mean, 
@@ -65,7 +64,7 @@ names(mean_activity) <- c("interval", "mean")
 head(mean_activity,10)
 ```
 
-```{r}
+```{r plot2, echo=TRUE}
 plot(mean_activity$interval, 
      mean_activity$mean, 
      type="l", 
@@ -78,7 +77,7 @@ plot(mean_activity$interval,
 
 #####2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
-```{r}
+```{r max, echo=TRUE}
 max_pos <- which(mean_activity$mean == max(mean_activity$mean))
 mean_activity[max_pos, 1]
 ```
@@ -88,13 +87,13 @@ mean_activity[max_pos, 1]
 
 #####1. Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)
 
-```{r}
+```{r count, echo=TRUE}
 NA_count <- sum(is.na(activity$steps))
 ```
 
 #####2. Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
 
-```{r}
+```{r na, echo=TRUE}
 na_pos <- which(is.na(activity$steps))
 mean_vec <- rep(mean(activity$steps, na.rm=TRUE), times=length(na_pos))
 head(mean_vec,10)
@@ -102,14 +101,14 @@ head(mean_vec,10)
 
 #####3. Create a new dataset that is equal to the original dataset but with the missing data filled in.
 
-```{r}
+```{r mean2, echo=TRUE}
 activity[na_pos, "steps"] <- mean_vec
 head(activity,10)
 ```
 
 #####4.Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
 
-```{r}
+```{r hist2, echo=TRUE}
 hist(sum_data$total, 
      breaks=seq(from=0, to=25000, by=2500),
      col="blue", 
@@ -125,13 +124,13 @@ hist(sum_data$total,
 
 
 Add new field for day
-```{r}
+```{r add1, echo=TRUE}
 activity <- cbind(activity,weekday=tolower(weekdays(activity$date)))
 ```
 
 add new field for weekday or weekend
 
-```{r}
+```{r add2, echo=TRUE}
 activity <- cbind(activity,
                   daytype=ifelse(activity$weekday == "saturday" |activity$weekday == "sunday", "weekend","weekday"))
 ```
@@ -139,16 +138,16 @@ activity <- cbind(activity,
 #####2. Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). See the README file in the GitHub repository to see an example of what this plot should look like using simulated data.
 
 
-```{r}
+```{r mean3, echo=TRUE}
 mean_activity <- aggregate(activity$steps, 
                        by=list(activity$daytype, 
                                activity$weekday, activity$interval), mean)
 names(mean_activity) <- c("daytype", "weekday", "interval", "mean")
 ```
 
-plot
+Plot the graph
 
-```{r}
+```{r plot4, echo=TRUE}
 library(lattice)
 
 xyplot(mean ~ interval | daytype, mean_activity, 

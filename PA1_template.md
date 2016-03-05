@@ -1,4 +1,3 @@
-# Reproducible Research: Peer Assessment 1
 
 
 ```r
@@ -58,7 +57,7 @@ hist(total_activity$total,
      main="Histogram of the total number of steps taken each day")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)
+![](PA1_template_files/figure-html/hist1-1.png)
 
 #####3. Calculate and report the mean and median of the total number of steps taken per day
 
@@ -119,7 +118,7 @@ plot(mean_activity$interval,
      main="Time-series of the average number of steps per intervals")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-8-1.png)
+![](PA1_template_files/figure-html/plot2-1.png)
 
 #####2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
@@ -191,7 +190,7 @@ hist(sum_data$total,
      main="Histogram of the total number of steps taken each day\n(NA replaced by mean value)")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-13-1.png)
+![](PA1_template_files/figure-html/hist2-1.png)
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
@@ -224,7 +223,7 @@ mean_activity <- aggregate(activity$steps,
 names(mean_activity) <- c("daytype", "weekday", "interval", "mean")
 ```
 
-plot
+Plot the graph
 
 
 ```r
@@ -238,5 +237,5 @@ ylab="Number of steps",
 layout=c(1,2))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-17-1.png)
+![](PA1_template_files/figure-html/plot4-1.png)
 
