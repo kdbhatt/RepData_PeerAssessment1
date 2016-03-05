@@ -1,13 +1,14 @@
+Krishan Bhatt  
+March 5, 2016  
 
+# Reproducible Research: Peer Assessment 1
 
-```r
-#Replace with your current working directory
-setwd("C:/Krishna/MyProject/DataScience/5_Reproducible_Research/RepData_PeerAssessment1")
-```
 
 ## Loading and preprocessing the data
 
+
 #####1. Load the data (i.e. read.csv())
+
 
 
 ```r
@@ -24,6 +25,7 @@ activity$date <- as.POSIXct(activity$date, format="%Y-%m-%d")
 ```
 
 ## What is mean total number of steps taken per day?
+
 
 #####1. Calculate the total number of steps taken per day
 
@@ -50,6 +52,7 @@ head(total_activity,10)
 
 #####2. Make a histogram of the total number of steps taken each day
 
+
 ```r
 hist(total_activity$total, 
      col="blue", 
@@ -60,6 +63,7 @@ hist(total_activity$total,
 ![](PA1_template_files/figure-html/hist1-1.png)
 
 #####3. Calculate and report the mean and median of the total number of steps taken per day
+
 
 ```r
 mean(total_activity$total)
@@ -79,6 +83,7 @@ median(total_activity$total)
 
 
 ## What is the average daily activity pattern?
+
 
 #####1. Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 
@@ -105,6 +110,7 @@ head(mean_activity,10)
 ## 9        40 0.0000000
 ## 10       45 1.4716981
 ```
+
 
 
 ```r
@@ -134,6 +140,7 @@ mean_activity[max_pos, 1]
 
 
 ## Imputing missing values
+
 
 #####1. Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)
 
@@ -178,7 +185,7 @@ head(activity,10)
 ## 10 37.3826 2012-10-01       45
 ```
 
-#####4.Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
+#####4. Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
 
 
 ```r
@@ -194,6 +201,7 @@ hist(sum_data$total,
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
+
 
 #####1. Create a new factor variable in the dataset with two levels ??? ???weekday??? and ???weekend??? indicating whether a given date is a weekday or weekend day.
 
